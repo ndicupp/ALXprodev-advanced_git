@@ -31,8 +31,13 @@ git commit -m "Add empty README.md"
 git push origin develop
 
 What you should have at the end
+Two branches:
+✔ main (empty)
+✔ develop (with README.md)
 
-A repo called ALXprodev-advanced_git
+Git Flow initialized with default settings
+
+README committed and pushed
 
 
 cd .git/hooks
@@ -78,11 +83,3 @@ exit 0
 
 chmod +x post-merge
 
-
-Two branches:
-✔ main (empty)
-✔ develop (with README.md)
-
-Git Flow initialized with default settings
-
-README committed and pushed
