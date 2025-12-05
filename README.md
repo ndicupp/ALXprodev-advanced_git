@@ -34,6 +34,51 @@ What you should have at the end
 
 A repo called ALXprodev-advanced_git
 
+
+cd .git/hooks
+touch pre-commit
+
+#!/bin/bash
+
+# Pre-commit hook: ensure every directory contains a README.md
+
+missing_readmes=0
+
+for dir in $(find . -type d | grep -v ".git"); do
+    if [ ! -f "$dir/README.md" ]; then
+        echo "❌ Missing README.md in directory: $dir"
+        missing_readmes=1
+    fi
+done
+
+if [ $missing_readmes -eq 1 ]; then
+    echo "Commit aborted. Please add README.md files."
+    exit 1
+fi
+
+exit 0
+
+chmod +x pre-commit
+
+
+cd .git/hooks
+touch post-merge
+
+#!/bin/bash
+
+# Post-merge hook: log merges into main branch
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+if [ "$branch" = "main" ]; then
+    echo "$(date): Merge completed into main branch" >> merge-log.txt
+fi
+
+exit 0
+
+chmod +x post-merge
+
+
 Two branches:
 ✔ main (empty)
 ✔ develop (with README.md)
